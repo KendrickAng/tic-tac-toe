@@ -1,4 +1,4 @@
-public abstract class Player {
+abstract class Player {
     private String token;
 
     Player(String token) {

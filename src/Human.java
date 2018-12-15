@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Human extends Player{
+class Human extends Player{
 
     Human(String token) {
         super(token);

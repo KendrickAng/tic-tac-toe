@@ -23,7 +23,7 @@ class Board {
         board = new String[rows][cols];
         for(int r = 0; r < rows; r++) {
             for(int c = 0; c < cols; c++) {
-                board[r][c] = "_";
+                board[r][c] = TOKEN_DEFAULT;
             }
         }
         print();
