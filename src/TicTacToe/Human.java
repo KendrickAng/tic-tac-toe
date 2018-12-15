@@ -1,3 +1,5 @@
+package TicTacToe;
+
 import java.util.Scanner;
 
 class Human extends Player{

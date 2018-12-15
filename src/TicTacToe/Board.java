@@ -1,3 +1,7 @@
+package TicTacToe;
+
+import static TicTacToe.TicTacToe.TOKEN_DEFAULT;
+
 class Board {
     private String[][] board;
     private int cols;

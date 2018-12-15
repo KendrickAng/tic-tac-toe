@@ -1,3 +1,7 @@
+package TicTacToe;
+
+import static TicTacToe.TicTacToe.TOKEN_DEFAULT;
+
 class GameMaster {
     private Board board;
 
@@ -19,13 +23,22 @@ class GameMaster {
     }
 
     boolean isMoveValid(int[] move) {
+        if(isMoveValidHelper(move)) {
+            return true;
+        } else {
+            System.out.println("Invalid input! Re-enter your coordinates.");
+            return false;
+        }
+    }
+
+    private boolean isMoveValidHelper(int[] move) {
         int height = board.getRows();
         int width = board.getCols();
-        int x = move[0]; int y = move[1];
-        if(x < 0 || x > width - 1 || y < 0 || y > height - 1) {
-            return false; // ensure valid input
+        int row = move[0]; int col = move[1];
+        if(row < 0 || row > width - 1 || col < 0 || col > height - 1) {
+            return false; // out of bounds
         } else {
-            return true;
+            return board.get(row, col).equals(TOKEN_DEFAULT); // true if board space is empty ("_")
         }
     }
 }

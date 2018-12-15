@@ -1,5 +1,5 @@
 1. Print the empty board with coordinate markings
 2. Get Set methods the position of the board
 3. method to check winning
-4. Human inherits Player -> capability to declare a move
+4. TicTacToe.Human inherits TicTacToe.Player -> capability to declare a move
 5. method to check validity of move
