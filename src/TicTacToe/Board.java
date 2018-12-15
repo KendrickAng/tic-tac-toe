@@ -1,33 +1,37 @@
 package TicTacToe;
 
-import static TicTacToe.TicTacToe.TOKEN_DEFAULT;
-
 class Board {
-    private String[][] board;
+    private Tile[][] board;
     private int cols;
     private int rows;
 
     Board() {
         cols = 3;
         rows = 3;
-        initBoard();
+        init();
     }
 
     /** Gets the string at position row, col*/
-    String get(int row, int col) {
+    String getToken(int row, int col) {
+        return getTile(row, col).getToken();
+    }
+
+    /** Gets the tile at position row, col, returns null if out of bounds*/
+    Tile getTile(int row, int col) {
+        if(row < 0 || row >= rows || col < 0 || col >= cols) return null;
         return board[row][col];
     }
     
     /** Sets the string at position row, col to s*/
-    void set(int row, int col, String s) {
-        board[row][col] = s;
+    void setToken(int row, int col, String s) {
+        getTile(row, col).setToken(s);
     }
     
-    private void initBoard() {
-        board = new String[rows][cols];
+    private void init() {
+        board = new Tile[rows][cols];
         for(int r = 0; r < rows; r++) {
             for(int c = 0; c < cols; c++) {
-                board[r][c] = TOKEN_DEFAULT;
+                board[r][c] = new Tile(r, c);
             }
         }
         print();
@@ -39,10 +43,10 @@ class Board {
             System.out.print(c + " ");
         }
         System.out.println();
-        for(int i = 0; i < board.length; i++) {
-            for(int j = 0; j < board[i].length; j++) {
-                if(j == 0) System.out.print(i + " ");
-                System.out.print(board[i][j] + " ");
+        for(int r = 0; r < board.length; r++) {
+            for(int c = 0; c < board[r].length; c++) {
+                if(c == 0) System.out.print(r + " ");
+                System.out.print(board[r][c].getToken() + " ");
             }
             System.out.println();
         }

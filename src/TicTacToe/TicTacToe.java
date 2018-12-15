@@ -15,8 +15,8 @@ class TicTacToe {
     public static void main(String[] args) {
         board = new Board();
         gameMaster = new GameMaster(board);
-        p1 = new Human(TOKEN_1);
-        p2 = new Human(TOKEN_2);
+        p1 = new Human(TOKEN_1, board);
+        p2 = new Human(TOKEN_2, board);
         currentPlayer = TOKEN_1; // player 1 starts first
         gameOver = false;
 
@@ -25,27 +25,30 @@ class TicTacToe {
 		 */
 		board.print();
         do {
-            int[] move;
+            Tile tile;
             System.out.println(currentPlayer + " moves this turn.");
             // check move\
             if(p1.getToken().equals(currentPlayer)) {
-                // player 1 (X) moves
+                // player 1 (X) picks a tile to own
                 do {
-                    move = p1.makeMove();
+                    tile = p1.pickTile();
                 }
-                while(!gameMaster.isMoveValid(move));
-                board.set(move[0], move[1], p1.getToken());
+                while(!gameMaster.isTileValid(tile));
+                // TODO: GameMaster should handle this
+                tile.setToken(p1.getToken());
             } else {
-                // player 2 (O) moves
+                // player 2 (O) picks a tile to own
                 do {
-                    move = p2.makeMove();
+                    tile = p2.pickTile();
                 }
-                while(!gameMaster.isMoveValid(move));
-                board.set(move[0], move[1], p2.getToken());
+                while(!gameMaster.isTileValid(tile));
+                // TODO: GameMaster should handle this
+                tile.setToken(p2.getToken());
             }
             // print the board
             board.print();
             // check win condition
+            // TODO: Check Draw condition
             if(gameMaster.checkWin(currentPlayer)) {
                 gameOver = true;
                 System.out.println(currentPlayer + " WINS!");

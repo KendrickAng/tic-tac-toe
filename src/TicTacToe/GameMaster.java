@@ -13,17 +13,17 @@ class GameMaster {
         int max = board.getRows();
         // check rows and columns
         for(int i = 0; i < max; i++) {
-            if((board.get(i, 0).equals(s) && board.get(i, 1).equals(s) && board.get(i, 2).equals(s)) || // check rows
-                    board.get(0, i).equals(s) && board.get(1, i).equals(s) && board.get(2, i).equals(s)) return true; // check columns
+            if((board.getToken(i, 0).equals(s) && board.getToken(i, 1).equals(s) && board.getToken(i, 2).equals(s)) || // check rows
+                    board.getToken(0, i).equals(s) && board.getToken(1, i).equals(s) && board.getToken(2, i).equals(s)) return true; // check columns
 
         }
-        if(board.get(0, 0).equals(s) && board.get(1, 1).equals(s) && board.get(2, 2).equals(s)) return true; // check descending diagonals
-        if(board.get(2, 0).equals(s) && board.get(1, 1).equals(s) && board.get(0, 2).equals(s)) return true; // check ascending diagonals
+        if(board.getToken(0, 0).equals(s) && board.getToken(1, 1).equals(s) && board.getToken(2, 2).equals(s)) return true; // check descending diagonals
+        if(board.getToken(2, 0).equals(s) && board.getToken(1, 1).equals(s) && board.getToken(0, 2).equals(s)) return true; // check ascending diagonals
         return false;
     }
 
-    boolean isMoveValid(int[] move) {
-        if(isMoveValidHelper(move)) {
+    boolean isTileValid(Tile tile) {
+        if(isTileValidHelper(tile)) {
             return true;
         } else {
             System.out.println("Invalid input! Re-enter your coordinates.");
@@ -31,14 +31,11 @@ class GameMaster {
         }
     }
 
-    private boolean isMoveValidHelper(int[] move) {
-        int height = board.getRows();
-        int width = board.getCols();
-        int row = move[0]; int col = move[1];
-        if(row < 0 || row > width - 1 || col < 0 || col > height - 1) {
+    private boolean isTileValidHelper(Tile tile) {
+        if(tile == null) {
             return false; // out of bounds
         } else {
-            return board.get(row, col).equals(TOKEN_DEFAULT); // true if board space is empty ("_")
+            return tile.getToken().equals(TOKEN_DEFAULT); // true if board space is empty ("_")
         }
     }
 }
