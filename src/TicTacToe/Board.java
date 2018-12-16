@@ -34,7 +34,6 @@ class Board {
                 board[r][c] = new Tile(r, c);
             }
         }
-        print();
     }
 
     void print() {

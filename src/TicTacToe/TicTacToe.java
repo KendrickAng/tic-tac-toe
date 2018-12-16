@@ -34,24 +34,26 @@ class TicTacToe {
                     tile = p1.pickTile();
                 }
                 while(!gameMaster.isTileValid(tile));
-                // TODO: GameMaster should handle this
-                tile.setToken(p1.getToken());
+                gameMaster.setTileToken(tile, p1.getToken());
             } else {
                 // player 2 (O) picks a tile to own
                 do {
                     tile = p2.pickTile();
                 }
                 while(!gameMaster.isTileValid(tile));
-                // TODO: GameMaster should handle this
-                tile.setToken(p2.getToken());
+                gameMaster.setTileToken(tile, p2.getToken());
             }
             // print the board
             board.print();
             // check win condition
-            // TODO: Check Draw condition
             if(gameMaster.checkWin(currentPlayer)) {
                 gameOver = true;
                 System.out.println(currentPlayer + " WINS!");
+            }
+            // TODO: Check Draw condition
+            if(gameMaster.checkDraw()) {
+                gameOver = true;
+                System.out.println("MATCH OVER! NOBODY WINS - DRAW");
             }
             // switch player next
             currentPlayer = currentPlayer.equals(TOKEN_1) ? TOKEN_2 : TOKEN_1;
