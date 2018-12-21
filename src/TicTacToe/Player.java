@@ -12,6 +12,14 @@ abstract class Player {
     String getToken() {
         return token;
     }
-    Board getBoard() { return board; }
+
+    Board getBoard() {
+        return board.getCopy();
+    }
+
+    Tile getTile(int row, int col) {
+    	return board.getTile(row, col);
+    }
+
     abstract Tile pickTile();
 }

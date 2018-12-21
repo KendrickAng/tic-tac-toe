@@ -1,6 +1,8 @@
 package TicTacToe;
 
 class TicTacToe {
+
+    final static int BOARD_SIZE = 4;
     final static String TOKEN_DEFAULT = "_";
     private final static String TOKEN_1 = "X";
     private final static String TOKEN_2 = "O";
@@ -8,15 +10,15 @@ class TicTacToe {
     private static Board board;
     private static GameMaster gameMaster;
     private static Human p1;
-    private static Human p2;
+    private static RandomAI p2;
     private static String currentPlayer;
     private static boolean gameOver;
 
     public static void main(String[] args) {
-        board = new Board();
+        board = new Board(BOARD_SIZE);
         gameMaster = new GameMaster(board);
         p1 = new Human(TOKEN_1, board);
-        p2 = new Human(TOKEN_2, board);
+        p2 = new RandomAI(TOKEN_2, board);
         currentPlayer = TOKEN_1; // player 1 starts first
         gameOver = false;
 

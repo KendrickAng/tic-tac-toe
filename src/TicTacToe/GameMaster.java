@@ -52,13 +52,14 @@ class GameMaster {
             }
         }
         // check each 3-inverse diag for win
-        for(int di = 0; di < max - (WIN_CONDITION - 1); di++) {
-//            if(board.getToken(max-1, di).equals(s) && board.getToken(max-2, di + 1).equals(s) && board.getToken(max-3, di + 2).equals(s)) win = true;
-            boolean diag_i_win = true;
-            for(int diw = 0; diw < WIN_CONDITION; diw++) {
-                if(!board.getToken(max - (diw + 1), di + diw).equals(s)) diag_i_win = false;
+        for(int r = 0; r < max - (WIN_CONDITION - 1); r++) {
+            for(int c = 0; c < max - (WIN_CONDITION - 1); c++) {
+                boolean diag_i_win = true;
+                for(int diw = 0; diw < WIN_CONDITION; diw++) {
+                    if(!board.getToken((max - 1) - r - diw, c + diw).equals(s)) diag_i_win = false;
+                }
+                if(diag_i_win) win = diag_i_win; // only allow win = false -> win = true, not win = true -> win = false
             }
-            if(diag_i_win) win = diag_i_win; // only allow win = false -> win = true, not win = true -> win = false
         }
         return win;
     }

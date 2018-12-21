@@ -1,13 +1,33 @@
 package TicTacToe;
 
 class Board {
-    private Tile[][] board;
+	private int rows;
     private int cols;
-    private int rows;
+	private Tile[][] board;
 
-    Board() {
-        cols = rows = 4;
-        init();
+    Board(int size) {
+        cols = rows = size;
+        board = new Tile[rows][cols];
+        for(int r = 0; r < rows; r++) {
+            for(int c = 0; c < cols; c++) {
+                board[r][c] = new Tile(r, c);
+            }
+        }
+    }
+
+    Board(Board oldBoard) {
+        rows = oldBoard.getRows();
+        cols = oldBoard.getCols();
+    	board = new Tile[rows][cols];
+        for(int r = 0; r < rows; r++) {
+            for(int c = 0; c < cols; c++) {
+                board[r][c] = oldBoard.getTile(r, c).getCopy();
+            }
+        }
+    }
+
+    Board getCopy() {
+        return new Board(this);
     }
 
     /** Gets the string at position row, col*/
@@ -24,15 +44,6 @@ class Board {
     /** Sets the string at position row, col to s*/
     void setToken(int row, int col, String s) {
         getTile(row, col).setToken(s);
-    }
-    
-    private void init() {
-        board = new Tile[rows][cols];
-        for(int r = 0; r < rows; r++) {
-            for(int c = 0; c < cols; c++) {
-                board[r][c] = new Tile(r, c);
-            }
-        }
     }
 
     void print() {
