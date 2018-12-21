@@ -2,7 +2,7 @@ package TicTacToe;
 
 class TicTacToe {
 
-    final static int BOARD_SIZE = 4;
+    final static int BOARD_SIZE = 3;
     final static String TOKEN_DEFAULT = "_";
     final static String TOKEN_1 = "X";
     final static String TOKEN_2 = "O";
@@ -19,6 +19,12 @@ class TicTacToe {
         board = new Board(BOARD_SIZE);
         rules = new Rules();
         gameMaster = new GameMaster();
+        /*
+        Lols, you can change Human to MinimaxAI to see 2 AIs fighting each other.
+
+        Though 4x4 is really slow and the moves are quite "stupid". (Limitation of Minimax)
+        Probably need an AI which can give a score based on the PROBABILITY of winning.
+         */
         p1 = new Human(TOKEN_1, board, rules);
         p2 = new MinimaxAI(TOKEN_2, board, rules);
         currentPlayer = TOKEN_1; // player 1 starts first

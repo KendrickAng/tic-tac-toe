@@ -8,6 +8,7 @@ import static TicTacToe.TicTacToe.TOKEN_DEFAULT;
 
 public class MinimaxAI extends Player {
 
+	private final static int MAX_DEPTH = Integer.MAX_VALUE;
 	private final static int WIN_SCORE = 1;
 	private final static int DRAW_SCORE = 0;
 	private final static int LOSE_SCORE = -1;
@@ -22,8 +23,8 @@ public class MinimaxAI extends Player {
 		Board board = super.getBoard();
 		String token = super.getToken();
 
-		Tile maxTile = null;
 		int maxScore = Integer.MIN_VALUE;
+		ArrayList<Tile> tiles = new ArrayList<>();
 		for(int r = 0; r < board.getRows(); r++) {
 			for(int c = 0; c < board.getCols(); c++) {
 				// make a new board w/ token at the empty spt
@@ -32,26 +33,33 @@ public class MinimaxAI extends Player {
 					Board b = board.getCopy();
 					b.setToken(r, c, token);
 
-					int score = getBoardScore(false, b);
+					int score = getBoardScore(0, false, b);
 					if (score > maxScore) {
-						maxTile = tile;
 						maxScore = score;
+						tiles.clear();
+					}
+					if (score == maxScore) {
+						tiles.add(tile);
 					}
 				}
 			}
 		}
 
-		return getTile(maxTile.getRow(), maxTile.getCol());
+		// Randomize tile picking
+		Tile tile = tiles.get((int) (Math.random() * tiles.size()));
+		return getTile(tile.getRow(), tile.getCol());
 	}
 
-	private int getBoardScore(boolean isMyTurn, Board board) {
-		String myToken = TOKEN_2;
-		String notMyToken = TOKEN_1;
+	private int getBoardScore(int depth, boolean isMyTurn, Board board) {
+		String myToken = super.getToken();
+		String notMyToken = myToken.equals(TOKEN_1) ? TOKEN_2 : TOKEN_1;
 		if (super.getRules().isWin(board, myToken)) {
     		return WIN_SCORE;
 		} else if (super.getRules().isWin(board, notMyToken)) {
 			return LOSE_SCORE;
 		} else if (super.getRules().isDraw(board)) {
+			return DRAW_SCORE;
+		} else if (depth > MAX_DEPTH) {
 			return DRAW_SCORE;
 		}
 		// There is at least one empty cell on the board, so have to do recursion
@@ -79,7 +87,14 @@ public class MinimaxAI extends Player {
     		// It's my turn, so try to maximise the score
 			int maxScore = Integer.MIN_VALUE;
 			for (Board b : boards) {
-				int score = getBoardScore(false, b);
+				int score = getBoardScore(depth + 1, false, b);
+				/*
+				Actually this check is OK, just that because in a 4x4 game with 3 consecutive tokens
+				there is no way for it to win.
+				 */
+				if (score == WIN_SCORE) {
+					return score;
+				}
 				if (score > maxScore) {
 					maxScore = score;
 				}
@@ -89,7 +104,10 @@ public class MinimaxAI extends Player {
     		// It's not my turn, so minimize the score
     		int minScore = Integer.MAX_VALUE;
     		for (Board b : boards) {
-    			int score = getBoardScore(true, b);
+    			int score = getBoardScore(depth + 1, true, b);
+    			if (score == LOSE_SCORE) {
+    				return score;
+				}
     			if (score < minScore) {
     				minScore = score;
 				}
