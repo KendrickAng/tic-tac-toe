@@ -6,8 +6,8 @@ class Board {
     private int rows;
 
     Board() {
-        cols = 3;
-        rows = 3;
+        cols = 4;
+        rows = 4;
         init();
     }
 
