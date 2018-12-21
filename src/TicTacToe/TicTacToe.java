@@ -50,7 +50,6 @@ class TicTacToe {
                 gameOver = true;
                 System.out.println(currentPlayer + " WINS!");
             }
-            // TODO: Check Draw condition
             if(gameMaster.checkDraw()) {
                 gameOver = true;
                 System.out.println("MATCH OVER! NOBODY WINS - DRAW");

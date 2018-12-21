@@ -20,20 +20,45 @@ class GameMaster {
     boolean checkWin(String s) {
         boolean win = false;
         int max = board.getRows();
-        // check rows and columns
-        for(int i = 0; i < max; i++) { // We return true instead of returning false since the events are non-exhaustive (its possible for no winning condition to occur)
-            for(int r = 0; r < max - (WIN_CONDITION - 1); r++) { // check each 3-row for win
-                if(board.getToken(i, r).equals(s) && board.getToken(i, r + 1).equals(s) && board.getToken(i, r + 2).equals(s)) win = true;
-            }
-            for(int c = 0; c < max - (WIN_CONDITION - 1); c++) { // check each 3-col for win
-                if(board.getToken(c, i).equals(s) && board.getToken(c + 1, i).equals(s) && board.getToken(c + 2, i).equals(s)) win = true;
+        // We return true instead of returning false since the events are non-exhaustive (its possible for no winning condition to occur)
+        // check rows
+        for(int r = 0; r < max; r++) { // check each 3-row for win
+            for(int c = 0; c < max - (WIN_CONDITION - 1); c++) {
+                boolean row_win = true;
+                for(int rw = 0; rw < WIN_CONDITION; rw++) { // check individual 3-row
+                    if(!board.getToken(r, c + rw).equals(s)) row_win = false;
+                }
+                if(row_win) win = row_win; // only allow win = false -> win = true, not win = true -> win = false
             }
         }
-        for(int d = 0; d < max - (WIN_CONDITION - 1); d++) { // check each 3-diag for win
-            if(board.getToken(d, d).equals(s) && board.getToken(d + 1, d + 1).equals(s) && board.getToken(d + 2, d + 2).equals(s)) win = true;
+        // check columns
+        for(int r = 0; r < max - (WIN_CONDITION - 1); r++) {
+            for(int c = 0; c < max; c++) { // check each 3-col for win
+                boolean col_win = true;
+                for(int cw = 0; cw < WIN_CONDITION; cw++) {
+                    if(!board.getToken(r + cw, c).equals(s)) col_win = false;
+                }
+                if(col_win) win = col_win; // only allow win = false -> win = true, not win = true -> win = false
+            }
         }
-        for(int di = 0; di < max - (WIN_CONDITION - 1); di++) { // check each 3-inverse diag for win
-            if(board.getToken(max-1, di).equals(s) && board.getToken(max-2, di + 1).equals(s) && board.getToken(max-3, di + 2).equals(s)) win = true;
+        // check each 3-diag for win
+        for(int r = 0; r < max - (WIN_CONDITION  - 1); r++) {
+            for (int c = 0; c < max - (WIN_CONDITION - 1); c++) {
+                boolean diag_win = true;
+                for (int dw = 0; dw < WIN_CONDITION; dw++) {
+                    if (!board.getToken(r + dw, c + dw).equals(s)) diag_win = false;
+                }
+                if (diag_win) win = diag_win; // only allow win = false -> win = true, not win = true -> win = false
+            }
+        }
+        // check each 3-inverse diag for win
+        for(int di = 0; di < max - (WIN_CONDITION - 1); di++) {
+//            if(board.getToken(max-1, di).equals(s) && board.getToken(max-2, di + 1).equals(s) && board.getToken(max-3, di + 2).equals(s)) win = true;
+            boolean diag_i_win = true;
+            for(int diw = 0; diw < WIN_CONDITION; diw++) {
+                if(!board.getToken(max - (diw + 1), di + diw).equals(s)) diag_i_win = false;
+            }
+            if(diag_i_win) win = diag_i_win; // only allow win = false -> win = true, not win = true -> win = false
         }
         return win;
     }
