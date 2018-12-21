@@ -15,6 +15,7 @@ class GameMaster {
     }
 
     /** Checks the entire board for a winning row/column/diagonal w.r.t the input token string*/
+    // TODO: allow the board to check for winner for any number of rows and columns
     boolean checkWin(String s) {
         int max = board.getRows();
         // check rows and columns
