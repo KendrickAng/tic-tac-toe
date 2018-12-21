@@ -4,21 +4,23 @@ class TicTacToe {
 
     final static int BOARD_SIZE = 4;
     final static String TOKEN_DEFAULT = "_";
-    private final static String TOKEN_1 = "X";
-    private final static String TOKEN_2 = "O";
+    final static String TOKEN_1 = "X";
+    final static String TOKEN_2 = "O";
 
     private static Board board;
+    private static Rules rules;
     private static GameMaster gameMaster;
     private static Human p1;
-    private static RandomAI p2;
+    private static MinimaxAI p2;
     private static String currentPlayer;
     private static boolean gameOver;
 
     public static void main(String[] args) {
         board = new Board(BOARD_SIZE);
-        gameMaster = new GameMaster(board);
-        p1 = new Human(TOKEN_1, board);
-        p2 = new RandomAI(TOKEN_2, board);
+        rules = new Rules();
+        gameMaster = new GameMaster();
+        p1 = new Human(TOKEN_1, board, rules);
+        p2 = new MinimaxAI(TOKEN_2, board, rules);
         currentPlayer = TOKEN_1; // player 1 starts first
         gameOver = false;
 
@@ -48,11 +50,11 @@ class TicTacToe {
             // print the board
             board.print();
             // check win condition
-            if(gameMaster.checkWin(currentPlayer)) {
+            if(rules.isWin(board, currentPlayer)) {
                 gameOver = true;
                 System.out.println(currentPlayer + " WINS!");
             }
-            if(gameMaster.checkDraw()) {
+            else if(rules.isDraw(board)) {
                 gameOver = true;
                 System.out.println("MATCH OVER! NOBODY WINS - DRAW");
             }

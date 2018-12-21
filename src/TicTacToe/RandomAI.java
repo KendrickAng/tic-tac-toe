@@ -4,8 +4,8 @@ import static TicTacToe.TicTacToe.BOARD_SIZE;
 
 public class RandomAI extends Player {
 
-	RandomAI(String token, Board board) {
-		super(token, board);
+	RandomAI(String token, Board board, Rules rules) {
+		super(token, board, rules);
 	}
 
 	@Override

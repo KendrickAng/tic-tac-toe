@@ -3,12 +3,12 @@ package TicTacToe;
 import static TicTacToe.TicTacToe.TOKEN_DEFAULT;
 
 class GameMaster {
-    private static final int WIN_CONDITION = 3; // get 3 in a row/col/diag to win
-    private Board board;
+//    private static final int WIN_CONDITION = 3; // get 3 in a row/col/diag to win
+//    private Board board;
 
-    GameMaster(Board board) {
-    	this.board = board;
-	}
+//    GameMaster(Board board) {
+//    	this.board = board;
+//	}
 
 	/** Sets the token at the input Tile to (token)*/
 	void setTileToken(Tile tile, String token) {
@@ -17,7 +17,8 @@ class GameMaster {
 
     /** Checks the entire board for a winning row/column/diagonal w.r.t the input token string*/
     // TODO: allow the board to check for winner for any number of rows and columns
-    boolean checkWin(String s) {
+    /*
+    boolean isWin(String s) {
         boolean win = false;
         int max = board.getRows();
         // We return true instead of returning false since the events are non-exhaustive (its possible for no winning condition to occur)
@@ -63,9 +64,11 @@ class GameMaster {
         }
         return win;
     }
+    */
 
     /** Returns true if board is full, false otherwise*/
-    boolean checkDraw() {
+    /*
+    boolean isDraw() {
         boolean isBoardFull = true;
         int row = board.getRows();
         int col = board.getCols();
@@ -76,6 +79,7 @@ class GameMaster {
         }
         return isBoardFull;
     }
+    */
 
     boolean isTileValid(Tile tile) {
         if(isTileValidHelper(tile)) {

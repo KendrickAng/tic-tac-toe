@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 class Human extends Player{
 
-    Human(String token, Board board) {
-        super(token, board);
+    Human(String token, Board board, Rules rules) {
+        super(token, board, rules);
     }
 
     /** Returns the Tile from the board where the move is to be made*/
