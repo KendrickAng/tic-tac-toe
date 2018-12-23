@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 class Human extends Player{
 
-    Human(String token, Board board, Rules rules) {
+    Human(Token token, Board board, Rules rules) {
         super(token, board, rules);
     }
 

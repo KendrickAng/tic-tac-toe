@@ -1,6 +1,6 @@
 package TicTacToe;
 
-import static TicTacToe.TicTacToe.TOKEN_DEFAULT;
+//import static TicTacToe.TicTacToe.TOKEN_DEFAULT;
 
 class GameMaster {
 //    private static final int WIN_CONDITION = 3; // get 3 in a row/col/diag to win
@@ -11,7 +11,7 @@ class GameMaster {
 //	}
 
 	/** Sets the token at the input Tile to (token)*/
-	void setTileToken(Tile tile, String token) {
+	void setTileToken(Tile tile, Token token) {
         tile.setToken(token);
     }
 
@@ -94,7 +94,7 @@ class GameMaster {
         if(tile == null) {
             return false; // out of bounds
         } else {
-            return tile.getToken().equals(TOKEN_DEFAULT); // true if board space is empty ("_")
+            return tile.getToken().equals(Token._); // true if board space is empty ("_")
         }
     }
 }

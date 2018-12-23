@@ -2,17 +2,17 @@ package TicTacToe;
 
 abstract class Player {
 
-    private String token;
+    private Token token;
     private Board board;
     private Rules rules;
 
-    Player(String token, Board board, Rules rules) {
+    Player(Token token, Board board, Rules rules) {
         this.token = token;
         this.board = board;
         this.rules = rules;
     }
 
-    String getToken() {
+    Token getToken() {
         return token;
     }
 

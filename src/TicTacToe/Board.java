@@ -31,7 +31,7 @@ class Board {
     }
 
     /** Gets the string at position row, col*/
-    String getToken(int row, int col) {
+    Token getToken(int row, int col) {
         return getTile(row, col).getToken();
     }
 
@@ -42,8 +42,8 @@ class Board {
     }
     
     /** Sets the string at position row, col to s*/
-    void setToken(int row, int col, String s) {
-        getTile(row, col).setToken(s);
+    void setToken(int row, int col, Token token) {
+        getTile(row, col).setToken(token);
     }
 
     void print() {

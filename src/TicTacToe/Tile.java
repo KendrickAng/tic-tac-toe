@@ -1,16 +1,16 @@
 package TicTacToe;
 
-import static TicTacToe.TicTacToe.TOKEN_DEFAULT;
+//import static TicTacToe.TicTacToe.TOKEN_DEFAULT;
 
 public class Tile {
     private int row;
     private int col;
-    private String token;
+    private Token token;
 
     Tile(int row, int col) {
         this.row = row;
         this.col = col;
-        token = TOKEN_DEFAULT;
+        token = Token._;
     }
 
     Tile(Tile tile) {
@@ -31,11 +31,11 @@ public class Tile {
 		return col;
 	}
 
-    String getToken() {
+    Token getToken() {
         return token;
     }
 
-    void setToken(String s) {
-        token = s;
+    void setToken(Token token) {
+        this.token = token;
     }
 }

@@ -2,9 +2,9 @@ package TicTacToe;
 
 import java.util.ArrayList;
 
-import static TicTacToe.TicTacToe.TOKEN_1;
-import static TicTacToe.TicTacToe.TOKEN_2;
-import static TicTacToe.TicTacToe.TOKEN_DEFAULT;
+//import static TicTacToe.TicTacToe.TOKEN_1;
+//import static TicTacToe.TicTacToe.TOKEN_2;
+//import static TicTacToe.TicTacToe.TOKEN_DEFAULT;
 
 public class MinimaxAI extends Player {
 
@@ -13,7 +13,7 @@ public class MinimaxAI extends Player {
 	private final static int DRAW_SCORE = 0;
 	private final static int LOSE_SCORE = -1;
 
-    MinimaxAI(String token, Board board, Rules rules) {
+    MinimaxAI(Token token, Board board, Rules rules) {
         super(token, board, rules);
     }
 
@@ -21,14 +21,14 @@ public class MinimaxAI extends Player {
 	Tile pickTile() {
 		// get the copied board
 		Board board = super.getBoard();
-		String token = super.getToken();
+		Token token = super.getToken();
 
 		int maxScore = Integer.MIN_VALUE;
 		ArrayList<Tile> tiles = new ArrayList<>();
 		for(int r = 0; r < board.getRows(); r++) {
 			for(int c = 0; c < board.getCols(); c++) {
 				// make a new board w/ token at the empty spt
-				if(board.getToken(r, c).equals(TOKEN_DEFAULT)) {
+				if(board.getToken(r, c).equals(Token._)) {
 					Tile tile = board.getTile(r, c);
 					Board b = board.getCopy();
 					b.setToken(r, c, token);
@@ -51,8 +51,8 @@ public class MinimaxAI extends Player {
 	}
 
 	private int getBoardScore(int depth, boolean isMyTurn, Board board) {
-		String myToken = super.getToken();
-		String notMyToken = myToken.equals(TOKEN_1) ? TOKEN_2 : TOKEN_1;
+		Token myToken = super.getToken();
+		Token notMyToken = myToken.equals(Token.X) ? Token.O : Token.X;
 		if (super.getRules().isWin(board, myToken)) {
     		return WIN_SCORE;
 		} else if (super.getRules().isWin(board, notMyToken)) {
@@ -64,7 +64,7 @@ public class MinimaxAI extends Player {
 		}
 		// There is at least one empty cell on the board, so have to do recursion
 
-		String token;
+		Token token;
 		if (isMyTurn) {
 			token = myToken;
 		} else {
@@ -75,7 +75,7 @@ public class MinimaxAI extends Player {
 		for(int r = 0; r < board.getRows(); r++) {
 			for(int c = 0; c < board.getCols(); c++) {
 				// make a new board w/ token at the empty spt
-				if(board.getToken(r, c).equals(TOKEN_DEFAULT)) {
+				if(board.getToken(r, c).equals(Token._)) {
 					Board b = board.getCopy();
 					b.setToken(r, c, token);
 					boards.add(b);
